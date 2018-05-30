@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+//improved game by 9001 - chris
 
 public class Farmer {
 	
