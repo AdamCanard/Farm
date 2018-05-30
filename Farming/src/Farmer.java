@@ -22,6 +22,10 @@ public class Farmer {
 		protected Image image_right;
 		protected Image image_up;
 		protected Image image_down;
+		protected Image image_left_seeds;
+		protected Image image_right_seeds;
+		protected Image image_up_seeds;
+		protected Image image_down_seeds;
 		public Image currentState = lay;
 		int i = 0;
 
@@ -47,6 +51,26 @@ public class Farmer {
 			
 			try {
 				this.image_up = ImageIO.read(new File("res/image-up.png"));
+			} catch (IOException e) {
+			}
+			
+			try {
+				this.image_left_seeds = ImageIO.read(new File("res/image-left-seeds.png"));
+			} catch (IOException e) {
+			}
+
+			try {
+				this.image_right_seeds = ImageIO.read(new File("res/image-right-seeds.png"));
+			} catch (IOException e) {
+			}
+			
+			try {
+				this.image_down_seeds = ImageIO.read(new File("res/image-down-seeds.png"));
+			} catch (IOException e) {
+			}
+			
+			try {
+				this.image_up_seeds = ImageIO.read(new File("res/image-up-seeds.png"));
 			} catch (IOException e) {
 			}
 			
@@ -112,6 +136,18 @@ public class Farmer {
 				if(moveIndex == 0){
 					return;
 				}else if (moveIndex == 1) {
+					 this.currentState = image_left_seeds;
+				}else if (moveIndex == 2){
+					this.currentState = image_right_seeds;
+				}else if (moveIndex == 3){
+					this.currentState = image_up_seeds;
+				}else{
+					this.currentState = image_down_seeds;
+				}
+			}else{
+				if(moveIndex == 0){
+					return;
+				}else if (moveIndex == 1) {
 					 this.currentState = image_left;
 				}else if (moveIndex == 2){
 					this.currentState = image_right;
@@ -120,17 +156,6 @@ public class Farmer {
 				}else{
 					this.currentState = image_down;
 				}
-			}
-			if(moveIndex == 0){
-				return;
-			}else if (moveIndex == 1) {
-				 this.currentState = image_left;
-			}else if (moveIndex == 2){
-				this.currentState = image_right;
-			}else if (moveIndex == 3){
-				this.currentState = image_up;
-			}else{
-				this.currentState = image_down;
 			}
 		}
 		
