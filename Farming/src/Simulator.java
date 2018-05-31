@@ -61,16 +61,7 @@
 	        getContentPane().add(panel, BorderLayout.CENTER);
 	        getContentPane().setLayout(null);
 	        
-	        btnPauseRun = new JButton("||");
-	        btnPauseRun.addMouseListener(new MouseAdapter() {
-	        	@Override
-	        	public void mouseClicked(MouseEvent arg0) {
-	        		btnPauseRun_mouseClicked(arg0);
-	        	}
-	        });
-	        btnPauseRun.setFont(new Font("Tahoma", Font.BOLD, 12));
-	        btnPauseRun.setBounds(20, 20, 48, 32);
-	        getContentPane().add(btnPauseRun);
+	      
 	        panel.setLayout(null);
 	        panel.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	        setSize(SCREEN_WIDTH + 20, SCREEN_HEIGHT + 36);
@@ -134,7 +125,7 @@
 		       
 		       g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
 		        for (Rectangle barrier : barriers) {
-		        	g.setColor(Color.RED);
+		        	g.setColor(Color.GREEN);
 		        		g.fillRect((int)barrier.getX(),(int) barrier.getY(), (int)barrier.getWidth(), (int)barrier.getHeight());    
 		        	}
 		        
