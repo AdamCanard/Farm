@@ -90,6 +90,8 @@
 	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) + 20, (int) ((SCREEN_HEIGHT / 1.5) - 48), 5, 53));
 	    	//pathway
 	    	backgrounds.add(new Rectangle(SCREEN_WIDTH/100, SCREEN_HEIGHT/2, SCREEN_WIDTH, 55));
+	    	//Plantable ground
+	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) - 50, SCREEN_HEIGHT - 250, 50, 50));
 	    }
 
 		public static void main(String[] args)
@@ -116,18 +118,17 @@
 		        //BS way of clearing out the old rectangle to save CPU.
 		        g.setColor(getBackground());
 		        
-		        g.setColor(Color.GREEN);
-		        
-		        
-		       g.setColor(Color.GREEN);
-		       
-		       
-		       
-		       g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
+		       		     		       
+		        g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
 		        for (Rectangle barrier : barriers) {
+		        	if(barrier.getWidth() == barrier.getHeight()){
+		        		g.setColor(Color.YELLOW);
+			        	g.fillRect((int)barrier.getX(),(int) barrier.getY(), (int)barrier.getWidth(), (int)barrier.getHeight()); 
+		        	}else{
 		        	g.setColor(Color.GREEN);
-		        		g.fillRect((int)barrier.getX(),(int) barrier.getY(), (int)barrier.getWidth(), (int)barrier.getHeight());    
+		        	g.fillRect((int)barrier.getX(),(int) barrier.getY(), (int)barrier.getWidth(), (int)barrier.getHeight());
 		        	}
+		        }
 		        
 		        for (Rectangle background : backgrounds) {
 		        	g.setColor(Color.ORANGE);
