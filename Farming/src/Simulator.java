@@ -267,19 +267,19 @@
 				switch (current_key_pressed) {		
 				case 37:	//LEFT   
 					player.currentX = player.currentX + 5;
-					moveIndex = 1;
+					
 					break;
 				case 39:	//RIGHT
 					player.currentX = player.currentX - 5;
-					moveIndex = 2;
+					
 					break;
 				case 38:	//UP
 					player.currentY = player.currentY + 5;
-					moveIndex = 3;
+					
 					break;
 				case 40:	//Down
 					player.currentY = player.currentY - 5;
-					moveIndex = 4;
+					
 					break;
 				default:
 					
