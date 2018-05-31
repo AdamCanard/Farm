@@ -84,14 +84,11 @@
 	    	//bottom barrier
 	    	barriers.add(new Rectangle( 0, SCREEN_HEIGHT - BARRIER_WIDTH, SCREEN_WIDTH, BARRIER_WIDTH));
 	    	//seeds barrier
-	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) - 24, (int) ((SCREEN_HEIGHT / 1.5)), 48, 5));
-	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) - 24, (int) ((SCREEN_HEIGHT / 1.5) - 45), 5, 48));
-	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) - 24, (int) ((SCREEN_HEIGHT / 1.5) - 48), 48, 5));
-	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) + 20, (int) ((SCREEN_HEIGHT / 1.5) - 48), 5, 53));
+	    	barriers.add(new Rectangle((int) (seeds.getCurrentX() - seeds.getWidth()/2),(int) (seeds.getCurrentY() - seeds.getHeight()), seeds.SPRITE_WIDTH, seeds.SPRITE_HEIGHT));
 	    	//pathway
 	    	backgrounds.add(new Rectangle(SCREEN_WIDTH/100, SCREEN_HEIGHT/2, SCREEN_WIDTH, 55));
 	    	//Plantable ground
-	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) - 50, SCREEN_HEIGHT - 250, 50, 50));
+	    	barriers.add(new Rectangle((SCREEN_WIDTH / 2) - 25, SCREEN_HEIGHT - 500, 50, 50));
 	    }
 
 		public static void main(String[] args)
@@ -121,7 +118,7 @@
 		       		     		       
 		        g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
 		        for (Rectangle barrier : barriers) {
-		        	if(barrier.getWidth() == barrier.getHeight()){
+		        	if(barrier.getWidth() == 50 && barrier.getHeight() == 50){
 		        		g.setColor(Color.YELLOW);
 			        	g.fillRect((int)barrier.getX(),(int) barrier.getY(), (int)barrier.getWidth(), (int)barrier.getHeight()); 
 		        	}else{
@@ -175,9 +172,17 @@
 		}
 	    private void isSeeds(int i) {
 	    	
-			if (i > 4){
+			if (i == 6){
+				player.holding = false;
+				plant();
+			}else if (i == 5){
 				player.holding = true;
 			}
+			
+		}
+
+		private void plant() {
+			// TODO Auto-generated method stub
 			
 		}
 
@@ -284,28 +289,28 @@
 			switch (current_key_pressed) {		
 				case 37:	//LEFT   
 					if (player.getCurrentX() > BARRIER_WIDTH + 2) {
-						player.setCurrentX(player.getCurrentX() - 2);
+						player.setCurrentX(player.getCurrentX() - 1);
 						moveIndex = 1;
 					}
 					
 					break;
 				case 39:	//RIGHT
 					if (player.getCurrentX() <  (SCREEN_WIDTH - BARRIER_WIDTH - 10)) {
-						player.setCurrentX(player.getCurrentX() + 2);
+						player.setCurrentX(player.getCurrentX() + 1);
 						moveIndex = 2;
 					}
 					
 					break;
 				case 38:	//UP
 					if(player.getCurrentY() < SCREEN_HEIGHT - (BARRIER_WIDTH + 10)){
-						player.setCurrentY(player.getCurrentY() - 2);
+						player.setCurrentY(player.getCurrentY() - 1);
 						moveIndex = 3;
 					}
 					
 					break;
 				case 40:	//Down
 					if(player.getCurrentY() < SCREEN_HEIGHT){
-						player.setCurrentY(player.getCurrentY() + 2);
+						player.setCurrentY(player.getCurrentY() + 1);
 						moveIndex = 4;
 					}
 					
@@ -319,8 +324,3 @@
 		}
 		
 	}
-
-	
-
-
-
