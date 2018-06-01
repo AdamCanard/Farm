@@ -16,6 +16,7 @@
 	    private JPanel panel = null;
 	    private JButton btnPauseRun;
 	    private boolean isPaused = false;
+	    
 		
 		final int FRAMES_PER_SECOND = 240;
 		final int SCREEN_HEIGHT = 600;
@@ -35,7 +36,8 @@
 	    ArrayList<Rectangle> barriers = null;
 	    ArrayList<Rectangle> backgrounds = null;
 	    Farmer player = null;
-	    Seeds seeds = null; 
+	    Seeds seeds = null;
+	    Plant plant = null;
 
 	    
 	    public Simulator()
@@ -72,7 +74,10 @@
 		    
 		    player = new Farmer(SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2, false);
 		    
-		    seeds = new Seeds (SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 1.5);			    	    
+		    seeds = new Seeds (SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 1.5);
+		    
+		    plant = new Plant ((SCREEN_WIDTH / 2) - 25,SCREEN_HEIGHT - 500, 0);
+		    
 	    	barriers = new ArrayList<Rectangle>();
 	    	backgrounds = new ArrayList<Rectangle>();
 	    	//left barrier
@@ -137,7 +142,9 @@
 		        
 		        g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
 		       
-		        
+		        if(plant.isPlanted == true){
+		        	g.drawImage(plant.getImage(), (int)(plant.getCurrentX() - (plant.getWidth()/2)),(int)(plant.getCurrentY() - plant.getHeight()), (int)plant.getWidth(), (int)plant.getHeight(), null);
+		        }
 		        
 		        
 		       
@@ -182,7 +189,7 @@
 		}
 
 		private void plant() {
-			// TODO Auto-generated method stub
+			
 			
 		}
 
