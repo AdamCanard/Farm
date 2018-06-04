@@ -23,11 +23,7 @@ public class Seeds {
 			this.closed = ImageIO.read(new File("res/seeds-closed.png"));
 		} catch (IOException e) {
 		}
-
-		try {
-			this.opened = ImageIO.read(new File("res/image-right.png"));
-		} catch (IOException e) {
-		}
+		
 	}
 	protected double currentX = 0;
 	protected double currentY = 0;

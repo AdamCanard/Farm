@@ -126,6 +126,7 @@
 		        	if(barrier.getWidth() == 50 && barrier.getHeight() == 50){
 		        		g.setColor(Color.YELLOW);
 			        	g.fillRect((int)barrier.getX(),(int) barrier.getY(), (int)barrier.getWidth(), (int)barrier.getHeight()); 
+			        	
 		        	}else{
 		        	g.setColor(Color.GREEN);
 		        	g.fillRect((int)barrier.getX(),(int) barrier.getY(), (int)barrier.getWidth(), (int)barrier.getHeight());
@@ -143,7 +144,7 @@
 		        g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
 		       
 		        if(plant.isPlanted == true){
-		        	g.drawImage(plant.getImage(), (int)(plant.getCurrentX() - (plant.getWidth()/2)),(int)(plant.getCurrentY() - plant.getHeight()), (int)plant.getWidth(), (int)plant.getHeight(), null);
+		        	g.drawImage(plant.getImage(), (int)(plant.getCurrentX() + 3),(int)(plant.getCurrentY() - 175), (int)plant.getWidth(), (int)plant.getHeight(), null);
 		        }
 		        
 		        
@@ -168,6 +169,7 @@
 					
 					if (barrier.getMinY() <= Y && Y <= barrier.getMaxY()){ 
 						isSeeds(i);
+						
 						return true;
 					}
 				}		
@@ -189,7 +191,7 @@
 		}
 
 		private void plant() {
-			
+			plant.isPlanted = true;
 			
 		}
 
