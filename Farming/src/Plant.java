@@ -1,7 +1,6 @@
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public class Plant {
@@ -48,6 +47,7 @@ public class Plant {
 
 
 	public Image getImage() {
+		stageUp(stage);
 		if(stage == 0){
 			currentStage = stage1;
 		}else if(stage == 1){
@@ -58,27 +58,51 @@ public class Plant {
 			currentStage = stage4;
 		}
 		
-		stageUp();
+		
 		return currentStage;
 	}
 
-	public void stageUp(){
-//		double newTime = System.currentTimeMillis() / 1000;
-//		if (setTime + 30 >= newTime){
-//			stage++;
-		for (int i = 0; i < 3; i++){
+	public void stageUp(int currentStage){
+
+		if (currentStage == 0){
 			new java.util.Timer().schedule( 
-			        new java.util.TimerTask() {
-			            @Override
-			            public void run() {
-			               stage++;
-			            }
-			        }, 
-			        1000 
-			);
+				new java.util.TimerTask() {
+					@Override
+					public void run() {
+			           stage = 1;
+			           System.out.println("x");
+			           
+			        }
+				 }, 
+				 10000 
+			);			
+		}else if (currentStage == 1){
+			new java.util.Timer().schedule( 
+					new java.util.TimerTask() {
+						@Override
+						public void run() {
+				           stage = 2;
+				           System.out.println("y");
+				           
+				        }
+					 }, 
+					 10000 
+				);			
+		}else{
+			new java.util.Timer().schedule( 
+					new java.util.TimerTask() {
+						@Override
+						public void run() {
+				           stage = 3;
+				           System.out.println("z");
+				           
+				        }
+					 }, 
+					 10000 
+				);			
+		}
 			
 		
-		}
 	}
 	
 
