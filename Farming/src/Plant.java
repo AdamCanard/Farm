@@ -9,20 +9,23 @@ public class Plant {
 	protected Image stage2;
 	protected Image stage3;
 	protected Image stage4;
+	protected Image grown;
 	protected Image currentStage;
 	protected double currentX;
 	protected double currentY;
-	protected int stage;
+	protected int stage; 
 	protected boolean isPlanted;
+	protected boolean harvestable;
 	final int SPRITE_WIDTH = 50; 
 	final int SPRITE_HEIGHT = 50;
 	double setTime;
 	
-	public Plant(int currentX, int currentY, int stage) {
+	public Plant(int currentX, int currentY, int stage, boolean harvestable) {
 		this.currentX = currentX;
 		this.currentY = currentY;
 		this.stage = stage;
 		this.isPlanted = false;
+		this.harvestable = harvestable;
 		this.setTime = System.currentTimeMillis() / 1000;
 		try {
 			this.stage1 = ImageIO.read(new File("res/ground-seed-stage1.png"));
@@ -43,18 +46,26 @@ public class Plant {
 			this.stage4 = ImageIO.read(new File("res/ground-seed-stage4.png"));
 		} catch (IOException e) {
 		}
+		
+		try {
+			this.grown = ImageIO.read(new File("res/fully-grown-plant.png"));
+		} catch (IOException e) {
+		}
 	}
 
 
 	public Image getImage() {
 		stageUp(stage);
-		if(stage == 0){
+		
+		if(currentStage == grown){
+			return currentStage;
+		}else if(stage == 0){
 			currentStage = stage1;
 		}else if(stage == 1){
 			currentStage = stage2;
 		}else if(stage == 2){
 			currentStage = stage3;
-		}else{
+		}else if(stage == 3){
 			currentStage = stage4;
 		}
 		
@@ -70,7 +81,7 @@ public class Plant {
 					@Override
 					public void run() {
 			           stage = 1;
-			           System.out.println("x");
+			           
 			           
 			        }
 				 }, 
@@ -82,7 +93,7 @@ public class Plant {
 						@Override
 						public void run() {
 				           stage = 2;
-				           System.out.println("y");
+				           
 				           
 				        }
 					 }, 
@@ -94,17 +105,26 @@ public class Plant {
 						@Override
 						public void run() {
 				           stage = 3;
-				           System.out.println("z");
+				           
+				           growFully();
 				           
 				        }
 					 }, 
 					 10000 
-				);			
+				);
+			
+			
 		}
 			
 		
 	}
 	
+
+	private void growFully() {
+		currentStage = grown;
+		harvestable = true;
+	}
+
 
 	public double getCurrentX() {
 		return currentX;

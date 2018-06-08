@@ -76,7 +76,7 @@
 		    
 		    seeds = new Seeds (SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 1.5);
 		    
-		    plant = new Plant ((SCREEN_WIDTH / 2) - 25,SCREEN_HEIGHT - 500, 0);
+		    plant = new Plant ((SCREEN_WIDTH / 2) - 25,SCREEN_HEIGHT - 500, 0, false);
 		    
 	    	barriers = new ArrayList<Rectangle>();
 	    	backgrounds = new ArrayList<Rectangle>();
@@ -140,12 +140,13 @@
 		        
 		        g.drawImage(seeds.getImage(), (int)(seeds.getCurrentX() - (seeds.getWidth()/2)),(int)(seeds.getCurrentY() - seeds.getHeight()), (int)seeds.getWidth(), (int)seeds.getHeight(), null);
 		        
-		        
-		        g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
-		       
 		        if(plant.isPlanted == true){
 		        	g.drawImage(plant.getImage(), (int)(plant.getCurrentX() + 3),(int)(plant.getCurrentY() - 175), (int)plant.getWidth(), (int)plant.getHeight(), null);
 		        }
+		        
+		        g.drawImage(player.getImage(), (int)player.getCurrentX(), (int)player.getCurrentY(), (int)player.getWidth(), (int)player.getHeight(), null);
+		       
+		        
 		        
 		        
 		       
@@ -181,7 +182,9 @@
 		}
 	    private void isSeeds(int i) {
 	    	
-			if (i == 6){
+			if (i == 6 && plant.isPlanted == true){
+				return;
+			}else if (i == 6){
 				player.holding = false;
 				plant();
 			}else if (i == 5){
@@ -191,6 +194,9 @@
 		}
 
 		private void plant() {
+			if (plant.isPlanted = true){
+				return;
+			}
 			plant.isPlanted = true;
 			
 		}

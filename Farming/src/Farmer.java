@@ -26,6 +26,10 @@ public class Farmer {
 		protected Image image_right_seeds;
 		protected Image image_up_seeds;
 		protected Image image_down_seeds;
+		protected Image image_left_plant;
+		protected Image image_right_plant;
+		protected Image image_up_plant;
+		protected Image image_down_plant;
 		public Image currentState = lay;
 		int i = 0;
 
@@ -71,6 +75,26 @@ public class Farmer {
 			
 			try {
 				this.image_up_seeds = ImageIO.read(new File("res/image-up-seeds.png"));
+			} catch (IOException e) {
+			}
+			
+			try {
+				this.image_left_plant = ImageIO.read(new File("res/image-left-plant.png"));
+			} catch (IOException e) {
+			}
+
+			try {
+				this.image_right_plant = ImageIO.read(new File("res/image-right-plant.png"));
+			} catch (IOException e) {
+			}
+			
+			try {
+				this.image_down_plant = ImageIO.read(new File("res/image-down-plant.png"));
+			} catch (IOException e) {
+			}
+			
+			try {
+				this.image_up_plant = ImageIO.read(new File("res/image-up-plant.png"));
 			} catch (IOException e) {
 			}
 			
