@@ -12,7 +12,10 @@ public class Farmer {
 	
 		protected double currentX = 0;
 		protected double currentY = 500;
-		protected boolean holding;
+		
+		
+		protected boolean holdingSeed;
+		protected boolean holdingPlant;
 
 		final int SPRITE_WIDTH = 55; // sprite.get_width()
 		final int SPRITE_HEIGHT = 75; //sprite.get_height()
@@ -31,12 +34,15 @@ public class Farmer {
 		protected Image image_up_plant;
 		protected Image image_down_plant;
 		public Image currentState = lay;
+		
 		int i = 0;
+		
 
-		public Farmer(double currentX, double currentY, boolean holding) {
+		public Farmer(double currentX, double currentY) {
 			this.currentX = currentX;
 			this.currentY = currentY;
-			this.holding = holding;
+			this.holdingSeed = false;
+			this.holdingPlant = false;
 			
 			try {
 				this.image_left = ImageIO.read(new File("res/image-left.png"));
@@ -156,7 +162,20 @@ public class Farmer {
  			//RIGHT 2
 			//UP	3
 			//DOWN  4
-			if(this.holding == true){
+
+			if (this.holdingPlant == true){
+				if(moveIndex == 0){
+					return;
+				}else if (moveIndex == 1) {
+					 this.currentState = image_left_plant;
+				}else if (moveIndex == 2){
+					this.currentState = image_right_plant;
+				}else if (moveIndex == 3){
+					this.currentState = image_up_plant;
+				}else{
+					this.currentState = image_down_plant;
+				}
+			}else if(this.holdingSeed == true){
 				if(moveIndex == 0){
 					return;
 				}else if (moveIndex == 1) {
@@ -182,6 +201,5 @@ public class Farmer {
 				}
 			}
 		}
+	}
 		
-		  
-}

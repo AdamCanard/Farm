@@ -10,6 +10,7 @@ public class Plant {
 	protected Image stage3;
 	protected Image stage4;
 	protected Image grown;
+	protected Image harvested;
 	protected Image currentStage;
 	protected double currentX;
 	protected double currentY;
@@ -19,6 +20,8 @@ public class Plant {
 	final int SPRITE_WIDTH = 50; 
 	final int SPRITE_HEIGHT = 50;
 	double setTime;
+	
+	private int time = 0;
 	
 	public Plant(int currentX, int currentY, int stage, boolean harvestable) {
 		this.currentX = currentX;
@@ -51,6 +54,8 @@ public class Plant {
 			this.grown = ImageIO.read(new File("res/fully-grown-plant.png"));
 		} catch (IOException e) {
 		}
+		
+		
 	}
 
 
@@ -75,47 +80,34 @@ public class Plant {
 
 	public void stageUp(int currentStage){
 
+		
+		
+		time ++;
+		
 		if (currentStage == 0){
-			new java.util.Timer().schedule( 
-				new java.util.TimerTask() {
-					@Override
-					public void run() {
-			           stage = 1;
-			           
-			           
-			        }
-				 }, 
-				 10000 
-			);			
+			if (time / 240 > 5){
+				stage = 1;
+				time = 0;
+				harvestable = false;
+			}
 		}else if (currentStage == 1){
-			new java.util.Timer().schedule( 
-					new java.util.TimerTask() {
-						@Override
-						public void run() {
-				           stage = 2;
-				           
-				           
-				        }
-					 }, 
-					 10000 
-				);			
-		}else{
-			new java.util.Timer().schedule( 
-					new java.util.TimerTask() {
-						@Override
-						public void run() {
-				           stage = 3;
-				           
-				           growFully();
-				           
-				        }
-					 }, 
-					 10000 
-				);
-			
+			if (time / 240 > 5){
+				stage = 2;
+				time = 0;
+				harvestable = false;
+			}	
+		}else if (currentStage == 2){
+			if (time / 240 > 5){
+				stage = 3;
+			}	
+		
+		}else if (currentStage == 3){
+			if (time / 240 > 5){
+				growFully();
+			}	
+		
 			
 		}
-			
 		
 	}
 	
@@ -125,7 +117,7 @@ public class Plant {
 		harvestable = true;
 	}
 
-
+	
 	public double getCurrentX() {
 		return currentX;
 	}
@@ -141,6 +133,11 @@ public class Plant {
 	public int getHeight() {
 		return SPRITE_HEIGHT;
 	}
+	
+	
+
+
+	
 
 
 	

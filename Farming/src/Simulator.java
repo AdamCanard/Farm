@@ -72,11 +72,11 @@
 
 		    
 		    
-		    player = new Farmer(SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2, false);
+		    player = new Farmer(SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2);
 		    
 		    seeds = new Seeds (SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 1.5);
 		    
-		    plant = new Plant ((SCREEN_WIDTH / 2) - 25,SCREEN_HEIGHT - 500, 0, false);
+		    
 		    
 	    	barriers = new ArrayList<Rectangle>();
 	    	backgrounds = new ArrayList<Rectangle>();
@@ -140,7 +140,7 @@
 		        
 		        g.drawImage(seeds.getImage(), (int)(seeds.getCurrentX() - (seeds.getWidth()/2)),(int)(seeds.getCurrentY() - seeds.getHeight()), (int)seeds.getWidth(), (int)seeds.getHeight(), null);
 		        
-		        if(plant.isPlanted == true){
+		        if(plant != null && plant.isPlanted == true){
 		        	g.drawImage(plant.getImage(), (int)(plant.getCurrentX() + 3),(int)(plant.getCurrentY() - 175), (int)plant.getWidth(), (int)plant.getHeight(), null);
 		        }
 		        
@@ -170,7 +170,8 @@
 					
 					if (barrier.getMinY() <= Y && Y <= barrier.getMaxY()){ 
 						isSeeds(i);
-						
+						harvest(i);
+
 						return true;
 					}
 				}		
@@ -180,23 +181,32 @@
 				
 			
 		}
-	    private void isSeeds(int i) {
+	    private void harvest(int i) {
+			if(i == 6 && !(plant == null) && plant.harvestable == true && player.holdingPlant == false){
+				player.holdingPlant = true;
+				plant.harvestable = false;
+				plant = null;
+				
+			}
+			
+		}
+
+		private void isSeeds(int i) {
 	    	
-			if (i == 6 && plant.isPlanted == true){
+			if (i == 6 && !(plant == null) && plant.isPlanted == true){
 				return;
-			}else if (i == 6){
-				player.holding = false;
+			}else if (i == 6 && player.holdingSeed == true){
+				player.holdingSeed = false;
 				plant();
-			}else if (i == 5){
-				player.holding = true;
+			}else if (i == 5 && player.holdingPlant == false && player.holdingSeed == false){
+				player.holdingSeed = true;
 			}
 			
 		}
 
 		private void plant() {
-			if (plant.isPlanted = true){
-				return;
-			}
+			
+			plant = new Plant ((SCREEN_WIDTH / 2) - 25,SCREEN_HEIGHT - 500, 0, false);
 			plant.isPlanted = true;
 			
 		}
